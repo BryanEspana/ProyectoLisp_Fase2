@@ -14,15 +14,10 @@ public class vista {
     /*** 
      * This method is MAPS menu
     */
-    public int menuLisp(){
-        System.out.println("El numero que colocas se convertira en:\n-Serie Fibonacci\n-Factorial\n-De celsius a farengeint\n-De farengeint a celsius");
-        System.out.println("Coloca el numero:");
-        int opcion = Scan.nextInt();
-        return opcion; 
-    }
+
     public void Fibonacci(){
         System.out.println("*************Resultado en Serie de Fibonacci************");
-        //lisp.fibonacci();
+        //lisp.fibonacciLisp();
     }
     public void Factorial(){
         System.out.println("*****************Resultado en Factorial*****************");

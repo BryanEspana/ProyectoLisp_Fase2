@@ -9,10 +9,13 @@
 public class controlador {
     public void Programa(){
         vista vista = new vista();
-        vista.menuLisp();
+        lisp lisp = new lisp();
+
+        lisp.menuLisp();
         vista.Fibonacci();
         vista.Factorial();
         vista.CelsiusFareng();
+        lisp.FarCel();
         vista.FarengCelsius();
     }
 }
