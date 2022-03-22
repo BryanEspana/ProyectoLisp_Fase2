@@ -10,6 +10,7 @@ public class controlador {
     public void Programa(){
         vista vista = new vista();
         lisp lisp = new lisp();
+        lisp.pedirNumero();
 
         lisp.menuLisp();
         vista.Fibonacci();
