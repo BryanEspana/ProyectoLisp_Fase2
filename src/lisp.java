@@ -7,29 +7,29 @@ import java.util.Scanner;
 
 public class lisp {
     static Scanner me = new Scanner(System.in);
-    static Decodificador decode = new Decodificador();
-    static AtomsFactory AF = new AtomsFactory();
-    static HashMap<String,Variable> vars = new HashMap<>();
+    static lispinstructions instr = new lispinstructions();
+    static factory factory = new factory();
+    static HashMap<String,print> vars = new HashMap<>();
 
-    public void saber(){
+    public void LispMain(){
         while(true){
             String instructions = me.nextLine();
-            String result = decode.decode(instructions);
+            String result = instr.expressions(instructions);
             if(result != null){
                 switch(result){
-                    case "END" -> {
+                    case "end" -> {
                         System.out.println("You can't end me, kidding have a nice day");
                         System.exit(0);
                     }
-                    case "PRINT" ->{
+                    case "print" ->{
                         print(instructions);
                     }
                     
-                    case "NEWVAR" ->{
-                        Variable temp = AF.VariableCreatot(instructions);
+                    case "newvar" ->{
+                        print temp = factory.VariableCreatot(instructions);
                         if(temp != null){
-                        vars.put(temp.name, temp);
-                            System.out.println("Variable " + temp.name + " created correctly");
+                        vars.put(temp.nombre, temp);
+                            System.out.println("Variable " + temp.nombre + " created correctly");
                         }
                     }
                     
