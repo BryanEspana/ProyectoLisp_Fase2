@@ -15,20 +15,16 @@ public class vista {
      * This method is MAPS menu
     */
 
-    public void Fibonacci(){
-        System.out.println("*************Resultado en Serie de Fibonacci************");
-        //lisp.fibonacciLisp();
+    public void menuLisp(){
+        System.out.println("i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo\n"+
+        "I I I I I I I      8     8   8           8     8     o  8    8\n"+
+        "I \\ `+' /  I      8         8           8     8        8    8\n"+
+        "\\  `-+-'  /       8         8           8      ooooo   8oooo\n"+
+        "  `-__|__-'        8         8           8           8  8\n"+
+        "      |            8     o   8           8     o     8  8\n"+
+        "------+------       ooooo    8oooooo  ooo8ooo   ooooo   8\n");
+        System.out.println("--Bienvendio a GNU CLISP<http://clisp.cons.org/>");
+        System.out.println("--Escribe entre parentesis '()' ");
     }
-    public void Factorial(){
-        System.out.println("*****************Resultado en Factorial*****************");
-        //lisp.Factorial();
-    }
-    public void CelsiusFareng(){
-        System.out.println("**********Resultado convertir de celsius a farengeint************");
-        //lisp.Factorial();
-    }
-    public void FarengCelsius(){
-        System.out.println("*********Resultado convertir de farengeiht a caelcius************");
-        //lisp.Factorial();
-    }
+    
 }
