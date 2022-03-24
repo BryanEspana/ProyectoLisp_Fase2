@@ -9,6 +9,9 @@
 public class controlador {
     public void Programa(){
         vista vista = new vista();
+        lisp lisp = new lisp();
         vista.menuLisp();
+        lisp.LispMain();
+
     }
 }

@@ -6,37 +6,64 @@ import java.util.regex.Pattern;
 import java.util.Scanner;
 
 public class lisp {
-    static Scanner me = new Scanner(System.in);
+
+    static Scanner scan = new Scanner(System.in);
     static lispinstructions instr = new lispinstructions();
     static factory factory = new factory();
-    static HashMap<String,print> vars = new HashMap<>();
+    static HashMap<String,datos> vars = new HashMap<>();
 
     public void LispMain(){
         while(true){
-            String instructions = me.nextLine();
+            String instructions = scan.nextLine();
             String result = instr.expressions(instructions);
             if(result != null){
                 switch(result){
-                    case "end" -> {
-                        System.out.println("You can't end me, kidding have a nice day");
+                    case "END" -> {
+                        System.out.println("No me quiero ir señor stark");
                         System.exit(0);
                     }
-                    case "print" ->{
+                    case "PRINT" ->{
                         print(instructions);
                     }
                     
-                    case "newvar" ->{
-                        print temp = factory.VariableCreatot(instructions);
+                    case "NEWVAR" ->{
+                        datos temp = factory.VariableCreator(instructions);
                         if(temp != null){
-                        vars.put(temp.nombre, temp);
-                            System.out.println("Variable " + temp.nombre + " created correctly");
+                        vars.put(temp.name, temp);
+                            System.out.println("la variable " + temp.name + " fue creada exitosamente");
                         }
                     }
                     
                 }
             }else{
-                System.out.println("instructions coulnd't be excecuted correctly");
+                System.out.println("No se pudo ejecutar correctamente las instrucciones");
             }
+            
+        }
+    }
+
+    private static void print(String instructions){
+        instructions = instructions.replaceAll("print", "");
+        Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //
+	Matcher matcher = pattern.matcher(instructions);
+        if(matcher.find()){
+            System.out.println(matcher.group().trim());
+        }
+        pattern = Pattern.compile("[a-z]", Pattern.CASE_INSENSITIVE); //
+        matcher = pattern.matcher(instructions);
+        if(matcher.find()){
+            if(vars.containsKey(matcher.group().trim())){
+                 System.out.println(vars.get(matcher.group().trim()));
+            }else{
+                System.out.println((matcher.group().trim()));
+            }
+        }
+        pattern = Pattern.compile("['][a-z]+[']", Pattern.CASE_INSENSITIVE); //
+        matcher = pattern.matcher(instructions);
+        if (matcher.find()) { 
+                 String temp = matcher.group().trim();
+                 temp = temp.replaceAll("'", "");
+                 System.out.println(temp);
         }
     }
     

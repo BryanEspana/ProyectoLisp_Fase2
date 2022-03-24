@@ -2,7 +2,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class factory {
-    public print VariableCreatot(String expresion) {
+    public datos VariableCreator(String expresion) {
         //Hallar el nombre y el valor
         Pattern patron = Pattern.compile("[ ]+[a-z]+[ ]+", Pattern.CASE_INSENSITIVE); //
 	    Matcher Emp = patron.matcher(expresion);
@@ -16,7 +16,7 @@ public class factory {
 	    Emp = patron.matcher(expresion);
 	        if (Emp.find()) { 
                 //Si es numerico regresar la variable
-	    	    return new print<Integer>(Integer.parseInt(Emp.group().trim()), nombre);
+	    	    return new datos<Integer>(Integer.parseInt(Emp.group().trim()), nombre);
                     }
              
         patron = Pattern.compile("[ ]+['][a-z]+['][ ]*", Pattern.CASE_INSENSITIVE); //
@@ -24,7 +24,7 @@ public class factory {
              if (Emp.find()) { 
                  String temp = Emp.group().trim();
                  temp = temp.replaceAll("'", "");
-                 return new print<String>(temp, nombre); 
+                 return new datos<String>(temp, nombre); 
                 }
                 
             }else{
