@@ -9,18 +9,21 @@ public class lispinstructions {
 	    return Emp.find();
 	}
 
-    public String expressions(String instructions){
-        if(test("^[(][ ]*setq[ ]+[a-z]+[ ]+[0-9]+[ ]*[)]$",instructions) || test("^[(][ ]*setq[ ]+[a-z]+[ ]+['][a-z]+['][ ]*[)]$",instructions)){
-            return "newvar";
+    public String expressions(String expresion){
+    
+        /*revisar si es una asigncion de variable
+        */
+        if(test("^[(][ ]*setq[ ]+[a-z]+[ ]+[0-9]+[ ]*[)]$",expresion) || test("^[(][ ]*setq[ ]+[a-z]+[ ]+['][a-z]+['][ ]*[)]$",expresion)){
+            return "NEWVAR";
         }
-        if(test("^[(][ ]*end[ ]*[)]$",instructions)){
-            return "end";
+        if(test("^[(][ ]*end[ ]*[)]$",expresion)){
+            return "END";
         }
-        if(test("^[(][ ]*print[ ]+[a-z][ ]*[)]$",instructions)|| test("^[(][ ]*print[ ]+[0-9][ ]*[)]$",instructions) ){
-            return "print";
+        if(test("^[(][ ]*print[ ]+[a-z][ ]*[)]$",expresion)|| test("^[(][ ]*print[ ]+[0-9][ ]*[)]$",expresion) ){
+            return "PRINT";
         }
-        if(test("^[(][ ]*print[ ]+['][a-z]+['][ ]*[)]$",instructions)){
-             return "print";
+        if(test("^[(][ ]*print[ ]+['][a-z]+['][ ]*[)]$",expresion)){
+             return "PRINT";
         }
           return null;
     }

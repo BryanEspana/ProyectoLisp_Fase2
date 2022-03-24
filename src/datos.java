@@ -1,10 +1,10 @@
 public class datos<T> {
     private T datox;
-    public String name;
+    public String nombre;
     
-    public datos(T datox, String name){
+    public datos(T datox, String nombre){
         this.datox = datox;
-        this.name = name;
+        this.nombre = nombre;
     }
     /*
     regresa el tipo del valor contenido
