@@ -1,16 +1,18 @@
 /*
-    Proyecto Fase #2 - Implementación de Lisp en Java
-    Catedratico: Moises Alonso
-    Auxs: Cristian Laynez y Rudik Rompich
-    Integrantes:
-        Angel Figueroa -21298
-        Bryan España - 21550
-        Javier Prado - 21486
+* UNIVERSIDAD DEL VALLE DE GUATEMALA
+* INGENIERIA EN CIENCIAS DE LA COMPUTACION Y TECNOLOGIAS DE LA INFORMACION
+* ALGORITMOS Y ESTRUCTURA DE DATOS - SECCION 10
+* FACULTAD DE INGENIERIA
+* PROYECTO 1 - INTERPRETE DE LISP
+* INTEGRANTES: BRYAN CARLOS ROBERTO ESPANA MACHORRO | 21550
+*              ANGEL GABRIEL PEREZ FIGUEROA         | 21298
+*              JAVIER ALEJANDRO PRADO RAMIREZ       | 21486
 */
+
 public class datos<T> {
     private T datox;
     public String nombre;
-    //Le da nombre a las dos variables
+    //le asigna nombres a las variables
     public datos(T datox, String nombre){
         this.datox = datox;
         this.nombre = nombre;
