@@ -2,213 +2,185 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+Clase para la realizacion de operaciones aritmeticas
+*/
 public class operadores {
-    
-    /*
-    *
-    */    
-    public void multi(String expresion, HashMap<String,datos> var){
-        Pattern patron = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); 
-        Matcher matcher = patron.matcher(expresion);
-        Integer resultado = 1; 
-        boolean print = true;
-        while (matcher.find()) {
-            if(var.containsKey(matcher.group().trim())){
-                //verificar que sea un dato numerico
-                if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){
-                resultado *= (Integer) var.get(matcher.group().trim()).getValue();
-                }
-                else{
-                    System.out.println("Operacion no permitida");
-                    print = false;
-                    break;
-                }
-            }
-            else{
-                try{
-                resultado *= Integer.parseInt(matcher.group().trim());
-                } 
-                catch(NumberFormatException ei){
-                    System.out.println( matcher.group().trim() + " no esta definida");
-                    print = false;
-                    break;
-                }
-            }
-        
-        }   
-    if(print){
-        System.out.println(resultado);
-    }
-    
-    }  
-    
-    /*
-    *
-    */
     public void add(String expresion, HashMap<String,datos> var){
-        Pattern patron = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
-        Matcher Emp = patron.matcher(expresion);
-        Integer resultado = 0;
+        Integer total = 0;
         boolean print = true;
-        while (Emp.find()) {
-            if(var.containsKey(Emp.group().trim())){
-                //verificar que sea un dato numerico
-                if(var.get(Emp.group().trim()).datoxType().equals(Integer.class)){
-                resultado += (Integer) var.get(Emp.group().trim()).getValue();
-                    }else{
-                        System.out.println("Operacion no permitida");
-                        print = false;
-                        break;
-                    }
+        Pattern pattern = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
+        Matcher matcher = pattern.matcher(expresion);
+
+    while (matcher.find()) {
+            if(var.containsKey(matcher.group().trim())){
+                if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){//ver que sea un numero
+                total += (Integer) var.get(matcher.group().trim()).getValue();
+                }else{
+                    System.out.println("no hay operadores suficientes");
+                    print = false;
+                    break;
+                }
             }else{
                 try{
-                resultado += Integer.parseInt(Emp.group().trim());
-                }catch(NumberFormatException ei){
-                    System.out.println( Emp.group().trim() + " no esta definido");
+                total += Integer.parseInt(matcher.group().trim());
+                } catch(NumberFormatException ei){
+                    System.out.println( matcher.group().trim() + " No esta definida");
                     print = false;
                     break;
                 }
             }
-            
-        }if(print){
-            System.out.println(resultado);
-        }
-    }
-
-    /*
-    *
-    */
-    public void quit(String expresion, HashMap<String,datos> var){
-        Pattern patron = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
-        Matcher matcher = patron.matcher(expresion);
-        /* 
-        * En este espacio se toma como valor inicial el operador de la operación 
-        */
-        // operador como valor inicial
-        Integer resultado = 0;
-        //como no hay un valor inicial, realizar la operacion enseguida
-        boolean skip = false;
-        if(matcher.find()){
-            if(var.containsKey(matcher.group().trim())){
-                //verificar que sea un dato numerico
-                if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){
-                    resultado = (Integer) var.get(matcher.group().trim()).getValue();
-                }
-            else{
-                System.out.println("Operacion no permitida");
-                skip = true;
-            }
-            }
-        else{
-            try{
-                resultado = Integer.parseInt(matcher.group().trim());
-            } 
-            catch(NumberFormatException ei){
-                System.out.println( matcher.group().trim() + " no esta definida");
-                skip = true;
-            }
-        }
-    }
         
-    if(!skip){
+    }   if(print){
+        System.out.println(total);
+        }
+    }
+    
+    
+    public void res(String expresion, HashMap<String,datos> var){
+    Pattern pattern = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
+    Matcher matcher = pattern.matcher(expresion);
+    /*
+    Usar el primer match como el valor inicial
+    */
+    Integer total = 0;
+    boolean continuar = false;//en caso de no haber un match inicial se salta realizar la operacion
+    if(matcher.find()){
+        if(var.containsKey(matcher.group().trim())){
+            if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){//ver que sea un numero
+            total = (Integer) var.get(matcher.group().trim()).getValue();
+            }else{
+                System.out.println("no hay operadores suficientes");
+                continuar = true;
+            }
+        }else{
+            try{
+            total = Integer.parseInt(matcher.group().trim());
+            } catch(NumberFormatException ei){
+                System.out.println( matcher.group().trim() + " no esta definido");
+                continuar = true;
+            }
+        }
+    }
+       
+    if(!continuar){
         boolean print = true;
         while (matcher.find()) {
                 if(var.containsKey(matcher.group().trim())){
-                    //verificar que sea un dato numerico
-                    if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){
-                    resultado -= (Integer) var.get(matcher.group().trim()).getValue();
-                    }
-                    else{
-                        System.out.println("Operacion no permitida");
+                    if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){//ver que sea un numero
+                    total -= (Integer) var.get(matcher.group().trim()).getValue();
+                    }else{
+                        System.out.println("no hay operadores suficientes");
                         print = false;
                         break;
                     }
-                }
-                else{
+                }else{
                     try{
-                    resultado -= Integer.parseInt(matcher.group().trim());
-                    } 
-                    catch(NumberFormatException ei){
-                        System.out.println( matcher.group().trim() + " no esta definida");
+                    total -= Integer.parseInt(matcher.group().trim());
+                    } catch(NumberFormatException ei){
+                        System.out.println( matcher.group().trim() + " no esta definido");
                         print = false;
                         break;
                     }
                 }
 
         }   if(print){
-            System.out.println(resultado);
+            System.out.println(total);
             }
+        }
     }
-    }
-        
-    /*
-    *
-    */   
-    public void div(String expresion, HashMap<String,datos> var){
-        Pattern patron = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
-        Matcher matcher = patron.matcher(expresion);
-        /* 
-        * En este espacio se toma como valor inicial el operador de la operación 
-        */
-        Integer resultado = 0;
-        //como no hay un valor inicial, realizar la operacion enseguida
-        boolean skip = false;
-        if(matcher.find()){
+    
+    
+    
+    public void multi(String expresion, HashMap<String,datos> var){
+    Pattern pattern = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
+    Matcher matcher = pattern.matcher(expresion);
+    Integer total = 1; //se coloca como 1 puesto que no interfiere con el resultado de multiplicar los numeros
+    boolean print = true;
+    while (matcher.find()) {
             if(var.containsKey(matcher.group().trim())){
-                //verificar que sea un dato numerico
-                if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){
-                resultado = (Integer) var.get(matcher.group().trim()).getValue();
-                }
-                else{
-                    System.out.println("Operacion no permitida");
-                    skip = true;
+                if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){//ver que sea un numero
+                total *= (Integer) var.get(matcher.group().trim()).getValue();
+                }else{
+                    System.out.println("no hay operadores suficientes");
+                    print = false;
+                    break;
                 }
             }else{
                 try{
-                    resultado = Integer.parseInt(matcher.group().trim());
-                } 
-                catch(NumberFormatException ei){
-                    System.out.println( matcher.group().trim() + " no esta definida");
-                    skip = true;
-                }
-            }
-        }
-    
-        if(!skip){
-            boolean print = true;
-            while (matcher.find()) {
-                try{
-                    if(var.containsKey(matcher.group().trim())){
-                        if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){//ver que sea un numero
-                        resultado /= (Integer) var.get(matcher.group().trim()).getValue();
-                        }
-                        else{
-                            System.out.println("Operacion no permitida");
-                            print = false;
-                            break;
-                        }
-                    }else
-                    {
-                    try{
-                        resultado /= Integer.parseInt(matcher.group().trim());
-                        }   
-                        catch(NumberFormatException ei){
-                            System.out.println( matcher.group().trim() + " no esta definida");
-                            print = false;
-                            break;
-                        }
-                    }
-                }
-                catch (ArithmeticException AE) { // excepcion
-                    System.out.println("Division por cero"); 
+                total *= Integer.parseInt(matcher.group().trim());
+                } catch(NumberFormatException ei){
+                    System.out.println( matcher.group().trim() + " no esta definido");
                     print = false;
                     break;
-
                 }
+            }
+        
+    }   if(print){
+        System.out.println(total);
+        }
+    }
+    
+    
+    public void div(String expresion, HashMap<String,datos> var){
+    Pattern pattern = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
+    Matcher matcher = pattern.matcher(expresion);
+    /*
+    Usar el primer match como el valor inicial
+    */
+    Integer total = 0;
+    boolean continuar = false;//en caso de no haber un match inicial se salta realizar la operacion
+    if(matcher.find()){
+        if(var.containsKey(matcher.group().trim())){
+            if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){//ver que sea un numero
+            total = (Integer) var.get(matcher.group().trim()).getValue();
+            }else{
+                System.out.println("no hay operadores suficientes");
+                continuar = true;
+            }
+        }else{
+            try{
+            total = Integer.parseInt(matcher.group().trim());
+            } catch(NumberFormatException ei){
+                System.out.println( matcher.group().trim() + " no esta definido");
+                continuar = true;
+            }
+        }
+    }
+    
+    if(!continuar){
+    boolean print = true;
+        while (matcher.find()) {
+            try{
+                if(var.containsKey(matcher.group().trim())){
+                    if(var.get(matcher.group().trim()).datoxType().equals(Integer.class)){//ver que sea un numero
+                    total /= (Integer) var.get(matcher.group().trim()).getValue();
+                    }else{
+                        System.out.println("Incopatible operators");
+                        print = false;
+                        break;
+                    }
+                }else{
+                    try{
+                    total /= Integer.parseInt(matcher.group().trim());
+                    } catch(NumberFormatException ei){
+                        System.out.println( matcher.group().trim() + " no esta definido");
+                        print = false;
+                        break;
+                    }
+                }
+            }catch (ArithmeticException e) {
+                // Exception handler
+                System.out.println(
+                    "divicion entre 0");
+                print = false;
+                break;
 
             }
+
+        }
             if(print){
-                System.out.println(resultado);
+            System.out.println(total);
             }
         }
     }

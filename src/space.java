@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 /*
 Clase Singleton del ambiente de ejecucion
 */
-public class space{
+public class space {
      
      factory factory = new factory();
-     HashMap<String,datos> Hashvar = new HashMap<>();
-     operadores operator = new operadores();
+     HashMap<String,datos> vars = new HashMap<>();
+     operadores operators = new operadores();
 
     private static space env;// variable estatica
     private space(){
@@ -22,52 +22,54 @@ public class space{
         return env;
     }
     
-    public synchronized void ejecutar(String expresion, String result){
+    public synchronized void ejecutar(String instructions, String result){
     if(result != null){
                 switch(result){
                     case "END" -> {
-                        System.out.println("You can't end me, kidding have a nice day");
+                        System.out.println("Saliendo del programa...");
                         System.exit(0);
                     }
                     case "PRINT" ->{
-                        print(expresion);
+                        print(instructions);
                     }
+                    
                     case "NEWVAR" ->{
-                        datos temp = factory.VariableCreator(expresion);
+                        datos temp = factory.VariableCreator(instructions);
                         if(temp != null){
-                        Hashvar.put(temp.nombre, temp);
+                        vars.put(temp.nombre, temp);
                             System.out.println("Variable " + temp.nombre + " created correctly");
                         }
-                    } 
-                    case "ADD" ->{
-                        operator.add(expresion, Hashvar);
                     }
-                    case "QUIT" ->{
-                        operator.quit(expresion, Hashvar);
+                    
+                    case "ADD" ->{
+                        operators.add(instructions, vars);
+                    }
+                    case "RES" ->{
+                        operators.res(instructions, vars);
                     }
                     case "MUL "
                         + "" ->{
-                        operator.multi(expresion, Hashvar);
+                        operators.multi(instructions, vars);
                     }
                     case "DIV" ->{
-                        operator.div(expresion, Hashvar);
+                        operators.div(instructions, vars);
                     }
                     
                 }
             }else{
-                System.out.println("Expresion coulnd't be excecuted correctly");
+                System.out.println("instructions coulnd't be excecuted correctly");
             }
     
     }
-     private synchronized void print(String expresion){
-        expresion = expresion.replaceAll("print", "");
+     private synchronized void print(String instructions){
+        instructions = instructions.replaceAll("print", "");
         Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //
-	Matcher matcher = pattern.matcher(expresion);
+	Matcher matcher = pattern.matcher(instructions);
         if(matcher.find()){
             System.out.println(matcher.group().trim());
         }
         pattern = Pattern.compile("['][a-z]+[']", Pattern.CASE_INSENSITIVE); //
-        matcher = pattern.matcher(expresion);
+        matcher = pattern.matcher(instructions);
         if (matcher.find()) { 
                  String temp = matcher.group().trim();
                  temp = temp.replaceAll("'", "");
@@ -75,12 +77,12 @@ public class space{
         }
         
         pattern = Pattern.compile("[ ]+[a-z]+[ ]*", Pattern.CASE_INSENSITIVE); //
-        matcher = pattern.matcher(expresion);
+        matcher = pattern.matcher(instructions);
         if(matcher.find()){
-            if(Hashvar.containsKey(matcher.group().trim())){
-                 System.out.println(Hashvar.get(matcher.group().trim()).getValue());
+            if(vars.containsKey(matcher.group().trim())){
+                 System.out.println(vars.get(matcher.group().trim()).getValue());
             }else{
-                System.out.println((matcher.group().trim()) + "\t is not defined yet");
+                System.out.println((matcher.group().trim()) + "\t no esta definida");
             }
         }
         

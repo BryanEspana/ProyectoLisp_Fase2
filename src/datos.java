@@ -1,3 +1,4 @@
+
 public class datos<T> {
     private T datox;
     public String nombre;
@@ -6,6 +7,11 @@ public class datos<T> {
         this.datox = datox;
         this.nombre = nombre;
     }
+
+    public T getValue(){
+        return datox;
+    }
+    
     /*
     regresa el tipo del valor contenido
     */
@@ -13,8 +19,5 @@ public class datos<T> {
         return datox.getClass();
     
     }
-    public T getValue(){
-        return datox;
-    }
-    
+
 }
