@@ -4,6 +4,11 @@ import java.util.regex.Pattern;
 
 //Clase para la realizacion de operaciones aritmeticas
 public class operadores{
+    
+    /** 
+     * @param expresion
+     * @param var
+     */
     public void suma(String expresion, HashMap<String,datos> var){
         Integer total = 0;
         boolean print = true;
@@ -34,6 +39,11 @@ public class operadores{
     }
     
     
+    
+    /** 
+     * @param expresion
+     * @param var
+     */
     public void resta(String expresion, HashMap<String,datos> var){
     Pattern patron = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
     Matcher Emp = patron.matcher(expresion);
@@ -89,6 +99,11 @@ public class operadores{
     
     
     
+    
+    /** 
+     * @param expresion
+     * @param var
+     */
     public void multiplicacion(String expresion, HashMap<String,datos> var){
     Pattern patron = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
     Matcher Emp = patron.matcher(expresion);
@@ -119,6 +134,11 @@ public class operadores{
     }
     
     
+    
+    /** 
+     * @param expresion
+     * @param var
+     */
     public void div(String expresion, HashMap<String,datos> var){
     Pattern patron = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
     Matcher Emp = patron.matcher(expresion);

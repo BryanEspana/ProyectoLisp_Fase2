@@ -31,6 +31,10 @@ public class lisp {
             
         }
     }
+
+/** 
+ * @param instructions
+ */
 private static void print(String instructions){
     instructions = instructions.replaceAll("print", "");
     Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //

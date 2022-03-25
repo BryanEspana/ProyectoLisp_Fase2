@@ -11,12 +11,23 @@ import java.time.format.TextStyle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class lispinstructions {
+    
+    /** 
+     * @param regex
+     * @param instructions
+     * @return boolean
+     */
     //Evaluar instructions
     private static boolean test(String regex, String instructions) {
 		Pattern patron = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 	    Matcher Emp = patron.matcher(instructions);
 	    return Emp.find();
 	}
+    
+    /** 
+     * @param instructions
+     * @return String
+     */
     //Regresa un objeto correspondiente de la instructions, si no lo devuelve como string
     public String expressions(String instructions){
         //Asignación de variable

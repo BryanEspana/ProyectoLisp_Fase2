@@ -12,6 +12,11 @@ import java.util.regex.Pattern;
 
 public class factory {
 
+    
+    /** 
+     * @param instructions
+     * @return datos
+     */
     public datos VariableCreator(String instructions) {
         //Implementación Case Insinsitive
         Pattern patron = Pattern.compile("[ ]+[a-zA-Z0-9]+[ ]+", Pattern.CASE_INSENSITIVE); //

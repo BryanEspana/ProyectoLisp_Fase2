@@ -15,6 +15,10 @@ public class space {
     private space(){
     
     }
+    
+    /** 
+     * @return space
+     */
     public synchronized static space getInstance() {
         if (env == null) {
             env = new space();
@@ -22,6 +26,11 @@ public class space {
         return env;
     }
     
+    
+    /** 
+     * @param instructions
+     * @param result
+     */
     public synchronized void ejecutar(String instructions, String result){
     if(result != null){
                 switch(result){
@@ -61,6 +70,10 @@ public class space {
             }
     
     }
+     
+     /** 
+      * @param instructions
+      */
      private synchronized void print(String instructions){
         instructions = instructions.replaceAll("print", "");
         Pattern patron = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //
