@@ -8,7 +8,7 @@ Clase Singleton del ambiente de ejecucion
 public class space {
      
      factory factory = new factory();
-     HashMap<String,datos> vars = new HashMap<>();
+     HashMap<String,datos> Hashvar = new HashMap<>();
      operadores operators = new operadores();
 
     private static space env;// variable estatica
@@ -36,53 +36,53 @@ public class space {
                     case "NEWVAR" ->{
                         datos temp = factory.VariableCreator(instructions);
                         if(temp != null){
-                        vars.put(temp.nombre, temp);
-                            System.out.println("Variable " + temp.nombre + " created correctly");
+                        Hashvar.put(temp.nombre, temp);
+                            System.out.println("Variable " + temp.nombre + " creada exitosamente.");
                         }
                     }
                     
-                    case "ADD" ->{
-                        operators.add(instructions, vars);
+                    case "SUM" ->{
+                        operators.suma(instructions, Hashvar);
                     }
-                    case "RES" ->{
-                        operators.res(instructions, vars);
+                    case "QUIT" ->{
+                        operators.resta(instructions, Hashvar);
                     }
-                    case "MUL "
+                    case "MUL"
                         + "" ->{
-                        operators.multi(instructions, vars);
+                        operators.multiplicacion(instructions, Hashvar);
                     }
                     case "DIV" ->{
-                        operators.div(instructions, vars);
+                        operators.div(instructions, Hashvar);
                     }
                     
                 }
             }else{
-                System.out.println("instructions coulnd't be excecuted correctly");
+                System.out.println("Error. Instruccion no permitida");
             }
     
     }
      private synchronized void print(String instructions){
         instructions = instructions.replaceAll("print", "");
-        Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //
-	Matcher matcher = pattern.matcher(instructions);
-        if(matcher.find()){
-            System.out.println(matcher.group().trim());
+        Pattern patron = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //
+	Matcher Emp = patron.matcher(instructions);
+        if(Emp.find()){
+            System.out.println(Emp.group().trim());
         }
-        pattern = Pattern.compile("['][a-z]+[']", Pattern.CASE_INSENSITIVE); //
-        matcher = pattern.matcher(instructions);
-        if (matcher.find()) { 
-                 String temp = matcher.group().trim();
+        patron = Pattern.compile("['][a-z]+[']", Pattern.CASE_INSENSITIVE); //
+        Emp = patron.matcher(instructions);
+        if (Emp.find()) { 
+                 String temp = Emp.group().trim();
                  temp = temp.replaceAll("'", "");
                  System.out.println(temp);
         }
         
-        pattern = Pattern.compile("[ ]+[a-z]+[ ]*", Pattern.CASE_INSENSITIVE); //
-        matcher = pattern.matcher(instructions);
-        if(matcher.find()){
-            if(vars.containsKey(matcher.group().trim())){
-                 System.out.println(vars.get(matcher.group().trim()).getValue());
+        patron = Pattern.compile("[ ]+[a-z]+[ ]*", Pattern.CASE_INSENSITIVE); //
+        Emp = patron.matcher(instructions);
+        if(Emp.find()){
+            if(Hashvar.containsKey(Emp.group().trim())){
+                 System.out.println(Hashvar.get(Emp.group().trim()).getValue());
             }else{
-                System.out.println((matcher.group().trim()) + "\t no esta definida");
+                System.out.println((Emp.group().trim()) + "\t no esta definida");
             }
         }
         
