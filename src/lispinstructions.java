@@ -25,6 +25,18 @@ public class lispinstructions {
         if(test("^[(][ ]*print[ ]+['][a-z]+['][ ]*[)]$",expresion)){
              return "PRINT";
         }
+        if (test("^[(][ ][+][ ]+[([a-z]+|[0-9]+)[ ]+([a-z]+|[0-9]+)]+[ ][)]$",expresion)){
+            return "ADD";
+        }
+        if (test("^[(][ ][-][ ]+[([a-z]+|[0-9]+)[ ]+([a-z]+|[0-9]+)]+[ ][)]$",expresion)){
+            return "QUIT";
+        }
+        if (test("^[(][ ][][ ]+[([a-z]+|[0-9]+)[ ]+([a-z]+|[0-9]+)]+[ ]*[)]$",expresion)){
+            return "MUL";
+        }
+        if (test("^[(][ ][/][ ]+[([a-z]+|[0-9]+)[ ]+([a-z]+|[0-9]+)]+[ ][)]$",expresion)){
+            return "DIV";
+        }
           return null;
     }
 

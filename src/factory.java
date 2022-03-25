@@ -28,7 +28,7 @@ public class factory {
                 }
                 
             }else{
-                System.out.println("Invalid sintaxis for variable declaration");
+                System.out.println("Error: Sintaxis invalida");
                 return null;
             }
             return null;
