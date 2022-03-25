@@ -1,21 +1,14 @@
-/* 
-    Hoja de Trabajo #6
-    Bryan Carlos Roberto España Machorro - 21550
-    Algoritmos y Estructura de Datos - Sección 10
+/*
+    Proyecto Fase #2 - Implementación de Lisp en Java
     Catedratico: Moises Alonso
-    Auxiliares:  Cristian Laynez y Rudik Rompich
+    Auxs: Cristian Laynez y Rudik Rompich
+    Integrantes:
+        Angel Figueroa -21298
+        Bryan España - 21550
+        Javier Prado - 21486
 */
-
-import java.util.Scanner;
-
 public class vista {
-    Scanner Scan = new Scanner(System.in);
-    lisp Lisp = new lisp();
-    /*** 
-     * This method is MAPS menu
-    */
-
-    public void menuLisp(){
+    public void Menu(){
         System.out.println("i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo\n"+
         "I I I I I I I      8     8   8           8     8     o  8    8\n"+
         "I \\ `+' /  I      8         8           8     8        8    8\n"+
@@ -26,5 +19,4 @@ public class vista {
         System.out.println("--Bienvendio a GNU CLISP<http://clisp.cons.org/>");
         System.out.println("--Escribe entre parentesis '()' ");
     }
-    
 }

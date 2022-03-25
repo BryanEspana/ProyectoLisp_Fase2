@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 /*
 Clase Singleton del ambiente de ejecucion
 */
-public class space{
+public class space {
      
      factory factory = new factory();
      HashMap<String,datos> Hashvar = new HashMap<>();
-     operadores operator = new operadores();
+     operadores operators = new operadores();
 
     private static space env;// variable estatica
     private space(){
@@ -22,65 +22,67 @@ public class space{
         return env;
     }
     
-    public synchronized void ejecutar(String expresion, String result){
+    public synchronized void ejecutar(String instructions, String result){
     if(result != null){
                 switch(result){
                     case "END" -> {
-                        System.out.println("You can't end me, kidding have a nice day");
+                        System.out.println("Saliendo del programa...");
                         System.exit(0);
                     }
                     case "PRINT" ->{
-                        print(expresion);
+                        print(instructions);
                     }
+                    
                     case "NEWVAR" ->{
-                        datos temp = factory.VariableCreator(expresion);
+                        datos temp = factory.VariableCreator(instructions);
                         if(temp != null){
                         Hashvar.put(temp.nombre, temp);
-                            System.out.println("Variable " + temp.nombre + " created correctly");
+                            System.out.println("Variable " + temp.nombre + " creada exitosamente.");
                         }
-                    } 
-                    case "ADD" ->{
-                        operator.add(expresion, Hashvar);
+                    }
+                    
+                    case "SUM" ->{
+                        operators.suma(instructions, Hashvar);
                     }
                     case "QUIT" ->{
-                        operator.quit(expresion, Hashvar);
+                        operators.resta(instructions, Hashvar);
                     }
-                    case "MUL "
+                    case "MUL"
                         + "" ->{
-                        operator.multi(expresion, Hashvar);
+                        operators.multiplicacion(instructions, Hashvar);
                     }
                     case "DIV" ->{
-                        operator.div(expresion, Hashvar);
+                        operators.div(instructions, Hashvar);
                     }
                     
                 }
             }else{
-                System.out.println("Expresion coulnd't be excecuted correctly");
+                System.out.println("Error. Instruccion no permitida");
             }
     
     }
-     private synchronized void print(String expresion){
-        expresion = expresion.replaceAll("print", "");
-        Pattern pattern = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //
-	Matcher matcher = pattern.matcher(expresion);
-        if(matcher.find()){
-            System.out.println(matcher.group().trim());
+     private synchronized void print(String instructions){
+        instructions = instructions.replaceAll("print", "");
+        Pattern patron = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE); //
+	Matcher Emp = patron.matcher(instructions);
+        if(Emp.find()){
+            System.out.println(Emp.group().trim());
         }
-        pattern = Pattern.compile("['][a-z]+[']", Pattern.CASE_INSENSITIVE); //
-        matcher = pattern.matcher(expresion);
-        if (matcher.find()) { 
-                 String temp = matcher.group().trim();
+        patron = Pattern.compile("['][a-z]+[']", Pattern.CASE_INSENSITIVE); //
+        Emp = patron.matcher(instructions);
+        if (Emp.find()) { 
+                 String temp = Emp.group().trim();
                  temp = temp.replaceAll("'", "");
                  System.out.println(temp);
         }
         
-        pattern = Pattern.compile("[ ]+[a-z]+[ ]*", Pattern.CASE_INSENSITIVE); //
-        matcher = pattern.matcher(expresion);
-        if(matcher.find()){
-            if(Hashvar.containsKey(matcher.group().trim())){
-                 System.out.println(Hashvar.get(matcher.group().trim()).getValue());
+        patron = Pattern.compile("[ ]+[a-z]+[ ]*", Pattern.CASE_INSENSITIVE); //
+        Emp = patron.matcher(instructions);
+        if(Emp.find()){
+            if(Hashvar.containsKey(Emp.group().trim())){
+                 System.out.println(Hashvar.get(Emp.group().trim()).getValue());
             }else{
-                System.out.println((matcher.group().trim()) + "\t is not defined yet");
+                System.out.println((Emp.group().trim()) + "\t no esta definida");
             }
         }
         

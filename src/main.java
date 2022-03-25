@@ -1,5 +1,3 @@
-
-
 /*
     Proyecto Fase #2 - Implementación de Lisp en Java
     Catedratico: Moises Alonso
@@ -10,9 +8,16 @@
         Javier Prado - 21486
 */
 
+
 public class main {
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-        controlador controlador = new controlador();
-        controlador.Programa();
-        }
+        controlador contr = new controlador();
+        vista vista = new vista();
+        vista.Menu();
+        contr.imprimir();
+        
+    }
 }
